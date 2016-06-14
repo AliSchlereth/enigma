@@ -1,11 +1,9 @@
 require 'pry'
-require_relative 'key_generator'
 
 class Offsets
-attr_reader :key, :date
+attr_reader :date
 
-  def initialize(key, date)
-    @key = key
+  def initialize(date)
     @date = date
   end
 
@@ -38,8 +36,5 @@ attr_reader :key, :date
     digits.to_s[-1].to_i
   end
 
-  def a_final_rotation
-    
-  end
 
 end

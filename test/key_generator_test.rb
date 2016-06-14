@@ -16,25 +16,6 @@ class KeyGeneratorTest <Minitest::Test
   #   refute key.key_generator.to_s[/[A-z]/]
   # end
 
-  def test_key_generator_calcualtes_the_A_rotation
-    key = KeyGenerator.new
-    assert_equal 12, key.a_rotation
-  end
-
-  def test_key_generator_calcualtes_the_B_rotation
-    key = KeyGenerator.new
-    assert_equal 23, key.b_rotation
-  end
-
-  def test_key_generator_calcualtes_the_C_rotation
-    key = KeyGenerator.new
-    assert_equal 34, key.c_rotation
-  end
-
-  def test_key_generator_calcualtes_the_D_rotation
-    key = KeyGenerator.new
-    assert_equal 45, key.d_rotation
-  end
 
 
 end
