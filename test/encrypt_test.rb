@@ -25,11 +25,36 @@ class EncryptTest <Minitest::Test
     assert_equal 19, encrypt.identify_character_in_map
   end
 
-  def test_encrypt_uses_the_character_map_location_and_final_rotation_to_swap_out_the_character
-    encrypt = Encrypt.new("This message.")
-    assert_equal "CHARACTER", encrypt.find_new_character
+  def test_encrypt_rotates_by_a_final_rotation
+    encrypt = Encrypt.new("This message.", 12345, 110916)
+    assert_equal 21, encrypt.rotation_number
   end
 
+  def test_encrypt_rotates_by_b_final_rotation
+    encrypt = Encrypt.new("This message.", 12345, 110916)
+    assert_equal 21, encrypt.rotation_number
+    assert_equal 23, encrypt.rotation_number
+  end
+
+  def test_encrypt_rotates_by_a_final_rotation_on_5th_try
+    encrypt = Encrypt.new("This message.", 12345, 110916)
+    assert_equal 21, encrypt.rotation_number
+    assert_equal 23, encrypt.rotation_number
+    assert_equal 39, encrypt.rotation_number
+    assert_equal 51, encrypt.rotation_number
+    assert_equal 21, encrypt.rotation_number
+  end
+
+  def test_encrypt_uses_the_character_map_location_and_final_rotation_to_identify_new_number
+    encrypt = Encrypt.new("This message.", 12345, 110916)
+    assert_equal "b", encrypt.find_new_character
+    assert_equal "5", encrypt.find_new_character
+  end
+
+  def test_encrypt_uses_new_number_to_replace_existing_character_in_incoming_message
+    encrypt = Encrypt.new("This message.", 12345, 110916)
+    assert_equal "bhis message.", encrypt.rotater
+  end
 
 
 end
