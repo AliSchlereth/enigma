@@ -78,6 +78,7 @@ attr_reader :message, :count, :position_counter, :character,
         binding.pry
         @message = message.gsub!(@character, @new_character)
       else
+        message
       end
     end
 
