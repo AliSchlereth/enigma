@@ -50,10 +50,22 @@ class EncryptTest <Minitest::Test
     assert_equal "b", encrypt.find_new_character
     assert_equal "5", encrypt.find_new_character
   end
+  
 
-  def test_encrypt_uses_new_number_to_replace_existing_character_in_incoming_message
-    encrypt = Encrypt.new("This message.", 12345, 110916)
-    assert_equal "bhis message.", encrypt.rotater
+  # def test_encrypt_uses_new_number_to_replace_existing_character_in_incoming_message
+  #   encrypt = Encrypt.new("This message.", 12345, 110916)
+  #   assert_equal "bhis message.", encrypt.rotater
+  # end
+
+  # def test_encrypt_rotates_through_to_replace_each_letter_of_the_message
+  #   encrypt = Encrypt.new("This message.", 12345, 110916)
+  #   assert_equal "b5i5s0e5axgqt", encrypt.rotater
+  #               #  "byiys0qyyxgqt"
+  # end
+
+  def test_if_gsub_is_replacing_all_of_same_character
+    encrypt = Encrypt.new("ttttt tttt", 12345, 110916)
+    assert_equal "dfdfa", encrypt.rotater
   end
 
 
