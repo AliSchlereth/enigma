@@ -6,7 +6,7 @@ attr_reader :message, :count, :position_counter, :character,
             :new_character
 
   def initialize(incoming_message, key = nil, date = nil)
-    @message = incoming_message.downcase.split(%r{\s*})
+    @message = incoming_message.downcase.split("")
     @character = character
     @count = message.length
     @position_counter = 0
@@ -27,21 +27,23 @@ attr_reader :message, :count, :position_counter, :character,
       '0', ' ', '.', ',']
   end
 
-  def enumerate_through_array
-    message.each do |character|
-      identify_character_in_map(character)
-      find_new_character
-      replace_character_in_incoming_message
-    end 
+  def encrypter
+    new_message = message.map do |character|
+      character_index = identify_character_in_map(character)
+      find_new_character(character_index)
+    end
+    new_message.join
   end
 
   def identify_character_in_map(character)
+
     # Find this letter in the character map.
-    @character_location = character_map.index(character)
+    # @character_location = character_map.index(character)
+    character_map.index(character)
   end
 
-  def find_new_character
-    rotate_now = (identify_character_in_map + rotation_number) % 39
+  def find_new_character(character_index)
+    rotate_now = (character_index + rotation_number) % 39
     # @position_counter += 1
     @new_character = character_map[rotate_now]
   end
@@ -68,11 +70,8 @@ attr_reader :message, :count, :position_counter, :character,
   end
 
   def replace_character_in_incoming_message(character, new_character)
-       character.gsub!(new_character)
-    end
+    character.gsub!(new_character)
   end
-
-
 
 
   # Identify the character used in the given message.
