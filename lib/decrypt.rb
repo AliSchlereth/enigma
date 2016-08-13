@@ -1,7 +1,7 @@
 require_relative 'final_rotation'
 require_relative 'tools'
 
-class Encrypt
+class Decrypt
 attr_reader :message, :rotation_counter, :final_rotation,
             :new_character
 
@@ -14,7 +14,7 @@ attr_reader :message, :rotation_counter, :final_rotation,
 
   include Tools
 
-  def encrypter
+  def decrypter
     new_message = message.map do |character|
       character_index = identify_character_in_map(character)
       find_new_character(character_index)
@@ -23,7 +23,7 @@ attr_reader :message, :rotation_counter, :final_rotation,
   end
 
   def find_new_character(character_index)
-    new_index = (character_index + rotation_number) % 39
+    new_index = (character_index - rotation_number) % 39
     # @position_counter += 1
     @new_character = character_map[new_index]
   end

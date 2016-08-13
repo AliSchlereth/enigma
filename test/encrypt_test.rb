@@ -6,23 +6,14 @@ require 'pry'
 
 class EncryptTest <Minitest::Test
 
-  def test_encrypt_takes_a_message
-    encrypt = Encrypt.new("This is a message.")
-    assert_equal "this is a message.", encrypt.message
+  def test_encrypt_translates_a_string_into_an_array
+    encrypt = Encrypt.new("This is a message")
+    assert_equal ['t', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e'], encrypt.message
   end
-
-  # def test_encrypt_translates_a_string_into_an_array
-  #   encrypt = Encrypt.new("This is a message")
-  #   assert_equal ['t', 'h', 'i', 's', 'i', 's', 'a', 'm', 'e', 's', 's', 'a', 'g', 'e'], encrypt.message
-  # end
-
-  # def test_encrypt_identifies_each_character_in_the_given_message_array
-  #   encrypt = Encrypt.new("This message.")
-  # end
 
   def test_encrypt_finds_character_in_the_character_map
     encrypt = Encrypt.new("This message.")
-    assert_equal 19, encrypt.identify_character_in_map
+    assert_equal 19, encrypt.identify_character_in_map('t')
   end
 
   def test_encrypt_rotates_by_a_final_rotation
@@ -47,22 +38,18 @@ class EncryptTest <Minitest::Test
 
   def test_encrypt_uses_the_character_map_location_and_final_rotation_to_identify_new_number
     encrypt = Encrypt.new("This message.", 12345, 110916)
-    assert_equal "b", encrypt.find_new_character
-    assert_equal "5", encrypt.find_new_character
+    assert_equal "b", encrypt.find_new_character(19)
+    assert_equal "5", encrypt.find_new_character(7)
   end
-
-
-  # def test_encrypt_uses_new_number_to_replace_existing_character_in_incoming_message
-  #   encrypt = Encrypt.new("This message.", 12345, 110916)
-  #   assert_equal "bhis message.", encrypt.rotater
-  # end
 
   def test_encrypt_rotates_through_to_replace_each_letter_of_the_message
     encrypt = Encrypt.new("This message.", 12345, 110916)
-    assert_equal "b5i5s0e5axgqt", encrypt.rotater
-                #  "byiys0qyyxgqt"
+    assert_equal "b5i5s0e5axgqt", encrypt.encrypter
   end
 
-
+  def test_encrypt_rotates_through_to_replace_each_letter_of_the_message
+    encrypt = Encrypt.new("..end..", 12345, 110916)
+    assert_equal "b5i5s0e5axgqt", encrypt.encrypter
+  end
 
 end
